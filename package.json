@@ -1,0 +1,29 @@
+{
+  "name": "greenbiisdk",
+  "version": "1.0.8",
+  "description": "The official Javascript SDK for the greenbii platform",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:commonjs": "babel app --out-dir lib",
+    "build:umd": "cross-env FILE_NAME=greenbiisdk webpack",
+    "build:umd:min": "cross-env NODE_ENV=production npm run build:umd",
+    "clean": "rimraf lib dist",
+    "build": "npm run clean && npm run build:commonjs && npm run build:umd && npm run build:umd:min"
+  },
+  "author": "teedon@greenbii.com",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.25.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.2",
+    "@babel/preset-env": "^7.16.11",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.8.0",
+    "rimraf": "^3.0.2",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
