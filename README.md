@@ -19,7 +19,7 @@ Run `npm install greenbiisdk -s` in your project folder.
 
     //initialize the sdk with your API token and the request_access_token
     //received in the query parameter of your app url
-    const param = new URLSearchParams(windows.location.search);
+    const param = new URLSearchParams(window.location.search);
     greenbii.init(
         {access_token: params.get("request_access_token"), 
         api_key: <your_api_key>}
