@@ -14,33 +14,46 @@ class greenbii {
     }
 
     async init(options) {
-        //console.log(localStorage.length);
-        console.log(typeof options.access_token);
         try {
-            if(localStorage === undefined || window === undefined) {
-                this.statusMessage = {code: "UNSUPPORTED_PLATFORM", message: "Only browser platform is support for this SDK at the moment"};
-                return false;
+            if(sessionStorage === undefined || window === undefined) {
+                this.statusMessage = {status: false, code: "UNSUPPORTED_PLATFORM", message: "Only browser platform is support for this SDK at the moment"};
+                throw this.statusMessage;
             }
         }
         catch(e) {
-            this.statusMessage = {code: "UNSUPPORTED_PLATFORM", message: "Only browser platform is support for this SDK at the moment"};
-            return false;
+            this.statusMessage = {status: false, code: "UNSUPPORTED_PLATFORM", message: "Only browser platform is support for this SDK at the moment"};
+            /*return new Promise((resolve, reject)=>{
+                reject(this.statusMessage)
+            })*/
+            throw this.statusMessage;
         }
-        console.log(options);
+       
         if(typeof options.api_key === 'undefined') {
-            this.statusMessage = {code: "NO_API_KEY", message: "API key no provided, unable to initialize Greenbii App Module"}; return false;
+            this.statusMessage = {status: false, code: "NO_API_KEY", message: "API key no provided, unable to initialize Greenbii App Module"};
+            /*return new Promise((resolve, reject)=>{
+                reject(this.statusMessage)
+            })*/
+            throw this.statusMessage;
         }
     
         if(typeof options.access_token === 'undefined') {
-             this.statusMessage = {code: "NO_ACCESS_TOKEN", message: "No access token is available for this request"}; return false;
+             this.statusMessage = {status: false, code: "NO_ACCESS_TOKEN", message: "No access token is available for this request"}; 
+             /*return new Promise((resolve, reject)=>{
+                reject(this.statusMessage)
+            })*/
+            throw this.statusMessage;
         }
 
         if(localStorage.getItem("__gb_user") !== null) {
-            const dt = JSON.parse(localStorage.getItem("__gb_user"));
+            const dt = JSON.parse(sessionStorage.getItem("__gb_user"));
             this.access_token = dt.access_token;
             this.current_user_details = dt.user;
             this.business_details = dt.business_details;
-            return true;
+            //return dt;
+            
+            return new Promise((resolve, reject)=>{
+                resolve({status: true, msg: null, data: dt});
+            })
         }
 
         return axios({url: GB_API_SERVER+"/initialize", method: "POST", data: {apiKey: options.api_key, access_token: options.access_token}}).then(response=>{
@@ -50,16 +63,18 @@ class greenbii {
                 this.current_user_details = response.data.data.user;
                 this.access_token = response.data.data.access_token;
                 //write the content of the file in storage
-                localStorage.setItem("__gb_user", JSON.stringify(response.data.data));
-
-                return true;
+                sessionStorage.setItem("__gb_user", JSON.stringify(response.data.data));
             }
-            else {
-                return false;
-            }
+            //console.log(response)
+            return response.data;
+            
+           
         }).catch(error=>{
             console.log(error)
-            return false;
+            /*return new Promise((resolve, reject)=>{
+                reject({status: false, code: "CONNECTION_ERROR", message: error})
+            })*/
+            throw error;
         })
     }
 
