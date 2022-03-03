@@ -1,5 +1,5 @@
 const axios = require('axios');
-const GB_API_SERVER = "http://localhost:8087/sdk/v1";  //"https://api.greenbii.com/v1"
+const GB_API_SERVER = "https://api.greenbii.com/v1"
 //const isBrowser = require('./check_browser');
 
 
