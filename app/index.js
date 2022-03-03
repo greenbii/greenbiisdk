@@ -1,5 +1,6 @@
 const axios = require('axios');
 const GB_API_SERVER = "https://api.greenbii.com/sdk/v1"
+import 'regenerator-runtime/runtime';
 //const isBrowser = require('./check_browser');
 
 

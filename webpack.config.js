@@ -5,6 +5,7 @@ const filename = `${FILE_NAME}${NODE_ENV === 'production' ? '.min' : ''}.js`;
 module.exports = {
     mode: NODE_ENV || 'development',
     entry: [
+        'regenerator-runtime/runtime.js',
         './app/index.js'
     ],
     output: {
