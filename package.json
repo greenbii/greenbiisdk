@@ -1,6 +1,6 @@
 {
   "name": "greenbiisdk",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "The official Javascript SDK for the greenbii platform",
   "main": "lib/index.js",
   "types": "index.d.ts",
