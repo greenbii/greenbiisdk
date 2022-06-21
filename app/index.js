@@ -1,5 +1,5 @@
 const axios = require('axios');
-const GB_API_SERVER = "https://api.greenbii.com/sdk/v1"
+const GB_API_SERVER = (window && window.location.hostname === "localhost") ? "http://localhost:8087/sdk/v1" : "https://api.greenbii.com/sdk/v1"
 import 'regenerator-runtime/runtime';
 //const isBrowser = require('./check_browser');
 
@@ -14,7 +14,7 @@ class greenbii {
     constructor(){
     }
 
-    async init(options) {
+    async connect(options) {
         try {
             if(sessionStorage === undefined || window === undefined) {
                 this.statusMessage = {status: false, code: "UNSUPPORTED_PLATFORM", message: "Only browser platform is support for this SDK at the moment"};
@@ -149,4 +149,4 @@ class greenbii {
 
 
 
-exports.greenbiisdk = greenbii;
+module.exports.greenbiisdk = greenbii;
