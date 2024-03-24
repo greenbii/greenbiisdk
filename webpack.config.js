@@ -6,10 +6,10 @@ module.exports = {
     mode: NODE_ENV || 'development',
     entry: [
         'regenerator-runtime/runtime.js',
-        './app/index.js'
+        './dist/greenbiisdk.js'
     ],
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'prod'),
         filename,
         libraryTarget: 'umd',
     }

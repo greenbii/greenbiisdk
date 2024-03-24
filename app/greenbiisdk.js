@@ -79,4 +79,4 @@ module.exports = function() {
 
 
 
-module.exports = greenbii;
+module.exports = greenbiisdk;
