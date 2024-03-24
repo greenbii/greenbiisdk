@@ -1,5 +1,6 @@
 const axios = require('axios');
-const GB_API_SERVER = (window && window.location.hostname === "localhost") ? "http://localhost:8087/sdk/v1" : "https://api.greenbii.com/sdk/v1"
+//const GB_API_SERVER = (window && window.location.hostname === "localhost") ? "http://localhost:8087/sdk/v1" : "https://api.greenbii.com/sdk/v1"
+GB_API_SERVER = "https://api.greenbii.com/sdk/v1"
 import 'regenerator-runtime/runtime';
 //const isBrowser = require('./check_browser');
 
@@ -105,7 +106,9 @@ class greenbii {
      * provided your app is granted explicit permission
      */
     getUserContacts() {
+        
         if(this.access_token !== null) {
+
             return axios({url: GB_API_SERVER+"/user-contacts", method: "POST", data: {access_token: this.access_token}}).then(response=>{
                 if(response.data.status === true) {
                     return response.data.data;
@@ -144,6 +147,13 @@ class greenbii {
         else {
             return {status: false, code: "NO_VALID_ACCESS_TOKEN", message:"Cannot complete request, no valid access token"}
         }
+    }
+
+    createDialog() {
+        const maskHeight = document.documentElement.scrollHeight;
+        const maskWidth = window.document.documentElement.scrollWidth;
+
+        //document.body.append('')
     }
 }
 

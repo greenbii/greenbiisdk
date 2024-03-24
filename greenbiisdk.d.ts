@@ -16,9 +16,11 @@ export declare type connectOptions = {
     access_token: string;
 };
 export declare type apiUserResponse = {
-    access_token: string;
-    user: GreenbiiUser;
-    business_details: GreenbiiBusiness;
+    data?: any;
+    // user: GreenbiiUser;
+    // business_details: GreenbiiBusiness;
+    msg: string;
+    status: boolean;
 };
 export declare class greenbiisdk {
     constructor();
